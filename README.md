@@ -27,18 +27,37 @@ Key finding: product success is highly concentrated, with a small subset of list
 
 ---
 
-## Data Pipeline
-
+## 🔄 Data Flow Architecture
 ```
-Axesso Real-Time Amazon Data API (RapidAPI)
-        ↓
-Python / Pandas — JSON parsing, cleaning, feature engineering
-        ↓
-Google BigQuery — SQL funnel queries, aggregations, segmentation
-        ↓
-Looker Studio — Live interactive dashboard connected to BigQuery
+┌──────────────────────────────┐
+│  Raw Amazon API Data         │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│  Python (Pandas)             │
+│  • Cleaning                  │
+│  • Feature Engineering       │
+│  • Null Handling             │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│  Processed Dataset (CSV)     │
+│  • Versioned outputs         │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│  BigQuery (SQL Analysis)     │
+│  • Funnel queries            │
+│  • Category analysis         │
+│  • Pricing behavior          │
+└──────────────┬───────────────┘
+               ↓
+┌──────────────────────────────┐
+│  Looker Studio Dashboard     │
+│  • Interactive exploration   │
+│  • Business insights         │
+└──────────────────────────────┘
 ```
-
 Data was extracted on **19/04/2026** across three product categories, yielding **224 unique product listings** from amazon.com. The raw file is preserved untouched; all transformations were applied to versioned copies.
 
 > To ensure reproducibility of the data pipeline, a clean version of the dataset was regenerated directly from the notebook-based transformation workflow. This version was used to validate final data types, feature engineering logic, and discount handling before export for SQL-based analysis.
@@ -186,7 +205,7 @@ Connected directly to BigQuery. Includes five analytical panels covering the ful
 - **manufacturer and series fields fully empty** — likely gated behind a paid API tier; brand-level analysis was not possible.
 - **Aggregated dashboard only** — all visuals reflect category or tier averages; product-level outliers are not visible at this view.
 
-👉 This analysis reflects correlation, not causation — results should be interpreted as behavioral signals rather than direct causal effects.
+### Note: This analysis reflects correlation, not causation — results should be interpreted as behavioral signals rather than direct causal effects.
 ---
 
 ## What Could Be Explored Further
