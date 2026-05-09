@@ -183,11 +183,16 @@ This analysis can support real-world marketplace and product strategy decisions:
 
 ---
 
-## Dashboard
+## Dashboard Preview
 
-**Live →** [Looker Studio Report](https://datastudio.google.com/s/jJJDPLOT3N8)
+Connected directly to BigQuery. Includes analytical panels covering:
+- funnel drop-off
+- category comparison
+- price-tier segmentation
+- engagement efficiency
+- lifecycle segmentation
 
-Connected directly to BigQuery. Includes five analytical panels covering the full funnel, category comparison, price tier segmentation, engagement efficiency, and lifecycle segmentation. A category filter control allows all panels to be sliced simultaneously.
+Interactive filtering allows category-level exploration across all dashboard components.
 
 ![Category Panels](visuals/category_analysis.png)
 
